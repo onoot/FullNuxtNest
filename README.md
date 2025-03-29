@@ -115,7 +115,7 @@ interface Product {
 ### Ручной запуск
 
 #### Требования
-- Node.js 16+
+- Node.js 20+
 - MongoDB 4+
 - Docker (опционально)
 
@@ -157,17 +157,17 @@ npm start
 - Volumes: mongodb_data:/data/db
 
 ### 2. Backend контейнер
-- Образ: node:16
+- Образ: node:20-alpine
 - Порт: 3000:3000
 - Зависимости: mongodb
 
 ### 3. Frontend контейнер
-- Образ: node:16
+- Образ: node:20-alpine
 - Порт: 5000:5000
 - Зависимости: backend
 
 ### 4. Swagger UI контейнер
-- Образ: node:16
+- Образ: node:20-alpine
 - Порт: 4000:4000
 - Зависимости: backend
 
