@@ -1,0 +1,22 @@
+{
+  "name": "food-products-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev -p 5000",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "core-js": "^3.32.2",
+    "nuxt": "^3.7.4",
+    "sass": "^1.68.0"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^20.6.3",
+    "sass-loader": "^13.3.2"
+  }
+}
