@@ -1,0 +1,240 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API управления продуктами питания",
+    "description": "API для управления продуктами питания с использованием NestJS",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Локальный сервер разработки"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Получить список продуктов",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Номер страницы"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Количество элементов на странице"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Создать новый продукт",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Продукт успешно создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Получить продукт по ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID продукта"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Продукт не найден"
+          }
+        }
+      },
+      "put": {
+        "summary": "Обновить продукт",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID продукта"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Продукт успешно обновлен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Продукт не найден"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удалить продукт",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID продукта"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Продукт успешно удален"
+          },
+          "404": {
+            "description": "Продукт не найден"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Уникальный идентификатор продукта"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название продукта"
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена продукта"
+          },
+          "category": {
+            "type": "string",
+            "description": "Категория продукта"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание продукта"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Количество на складе"
+          }
+        }
+      },
+      "CreateProductDto": {
+        "type": "object",
+        "required": ["name", "price", "category", "quantity"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название продукта"
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена продукта"
+          },
+          "category": {
+            "type": "string",
+            "description": "Категория продукта"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание продукта"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Количество на складе"
+          }
+        }
+      }
+    }
+  }
+} 
